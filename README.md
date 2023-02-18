@@ -1,1 +1,2 @@
-# Projeto prático com Node.js, express, express-handlebars e sequelize.
+# Projeto prático
+## Node.js, express, express-handlebars e sequelize.
