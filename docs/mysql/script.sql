@@ -1,0 +1,4 @@
+DROP DATABASE IF EXISTS tougths;
+
+CREATE DATABASE tougths CHARSET=UTF8 COLLATE utf8_general_ci;
+USE tougths;
