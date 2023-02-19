@@ -9,12 +9,18 @@ const app = express();
 const conn = require("./database/conn");
 
 //Models
-const Tought = require("./models/Toughts");
+const Tought = require("./models/Tought");
 const User = require("./models/User");
+
+//import Routes
+const toughtsRoutes = require("./routes/toughtsRoutes");
+const authRoutes = require("./routes/authRoutes");
+
+//import Controller
+const ToughtController = require("./controllers/ToughtController");
 
 app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
-app.set("view", "./views");
 
 //receber resposta do body
 app.use(
@@ -31,7 +37,7 @@ app.use(
     name: "session",
     secret: "nosso_secret",
     resave: false,
-    saveUnitialized: false,
+    saveUninitialized: false,
     store: new FileStore({
       logFn: function () {},
       path: require("path").join(require("os").tmpdir(), "sessions"),
@@ -58,6 +64,12 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+//Routes
+app.use("/toughts", toughtsRoutes);
+app.use("/", authRoutes);
+
+app.get("/", ToughtController.showToughts);
 
 conn
   .sync()
